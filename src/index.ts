@@ -78,7 +78,8 @@ async function main() {
 
   const firestore = new Firestore();
   const writer: CsvWriter<MinimalProfile> = createObjectCsvWriter({
-    path: `out/${process.argv[2]}.csv`,
+    // @ts-ignore: path typed as a string, but a file descriptor is valid, because it uses writeFile
+    path: process.stdout.fd,
     header: [
         {id: 'email', title: 'email'},
         {id: 'first_name', title: 'first_name'},
