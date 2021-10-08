@@ -27,7 +27,7 @@ interface Profile {
   utd_student: boolean
 }
 
-type MinimalProfile = Pick<Profile, "email" | "first_name" | "last_name">
+type MinimalProfile = Pick<Profile, "net_id" | "first_name" | "last_name">
 
 interface Attendee {
   email: string
@@ -44,7 +44,7 @@ interface Event {
 
 function toMinimalProfile(profile: Profile): MinimalProfile {
   return {
-    "email": profile.email,
+    "net_id": profile.net_id,
     "first_name": profile.first_name,
     "last_name": profile.last_name
   };
@@ -80,7 +80,7 @@ async function main() {
   const writer: CsvWriter<MinimalProfile> = createObjectCsvWriter({
     path: `out/${process.argv[2]}.csv`,
     header: [
-        {id: 'email', title: 'email'},
+        {id: 'net_id', title: 'NetID'},
         {id: 'first_name', title: 'first_name'},
         {id: 'last_name', title: 'last_name'}
     ]
